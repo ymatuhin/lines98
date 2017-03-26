@@ -27,15 +27,10 @@ a {
 .page-center {
 	width: 920px;
 	margin: 0 auto;
-    padding: 24px 0 0;
+    padding: 24px;
 }
 
 /* Field */
-#game-field {
-	position: relative;
-    margin-right: 240px;
-    height: 617px;
-}
 .square {
 	position: absolute;
 	width: 69px; height: 69px;
@@ -75,12 +70,27 @@ a {
 	background-image: url(ball-pink.png);
 }
 
+.game {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: row-reverse;
+	    -ms-flex-direction: row-reverse;
+	        flex-direction: row-reverse;
+}
+
 /* Column */
 #right-column {
-	float: right;
-	width: 240px; height: 617px;
 	position: relative;
+	width: 260px;
 }
+
+#game-field {
+	position: relative;
+	width: 617px;
+	margin-right: auto;
+}
+
 #scores {
 	margin: 15px 0 0;
 	font: 48px Myriad, Trebuchet MS, Arial, sans-serif;
