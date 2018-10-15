@@ -373,8 +373,12 @@ Line.prototype = {
     animation.start();
   },
   replace: function(items) {
-    if (items.length > this.items.length) {
-      this.items = items;
+    if (items.length > this.items.length || items.length > 4) {
+      if (this.items.length < 5) {
+        this.items = items;
+      } else {
+        this.items = this.items.concat(items);
+      }
     }
   },
 };
