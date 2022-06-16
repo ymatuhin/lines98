@@ -1,197 +1,259 @@
-html, body, td, th, form, h6 {margin: 0; padding: 0;}
-table {border: none; border-collapse: collapse;}
-html, body {height: 100%;}
-img	{border: none;}
-h6 {font-size: 100%;}
-h1, h2, h3, h4, h5, h6, p {margin-top: 0;}
+html,
+body,
+td,
+th,
+form,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border: none;
+  border-collapse: collapse;
+}
+html,
+body {
+  height: 100%;
+}
+img {
+  border: none;
+}
+h6 {
+  font-size: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+}
 
-.clear {width: 100%; overflow: hidden;}
-.w100 {width: 100%;}
-.rel {position: relative;}
+.clear {
+  width: 100%;
+  overflow: hidden;
+}
+.w100 {
+  width: 100%;
+}
+.rel {
+  position: relative;
+}
 
-#page-all {min-height: 100%;}
-* html #page-all {height: 100%;}
+#page-all {
+  min-height: 100%;
+}
+* html #page-all {
+  height: 100%;
+}
 
-ul.aux {margin: 0; padding: 0; list-style: none;}
-input.aux {border: none; background: transparent;}
+ul.aux {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+input.aux {
+  border: none;
+  background: transparent;
+}
 
 body {
-    background: url(page-bgr.png) #454545;
-	font: 81.25%/1.46  Arial, Helvetica, sans-serif;
-	color: #FFF;
+  background: url(page-bgr.png) #454545;
+  font: 81.25%/1.46 Arial, Helvetica, sans-serif;
+  color: #fff;
 }
 a {
-	color: #89ddff;
+  color: #89ddff;
 }
 /* Page */
 .page-center {
-	width: 920px;
-	margin: 0 auto;
-    padding: 24px;
+  width: 920px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
 /* Field */
 .square {
-	position: absolute;
-	width: 69px; height: 69px;
-	background: url(cell-bgr.png) no-repeat;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  position: absolute;
+  width: 69px;
+  height: 69px;
+  background: url(cell-bgr.png) no-repeat;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .square.selected {
-	background-position: 0 -69px;
+  background-position: 0 -69px;
 }
 
 /* Balls */
 .ball {
-	position: absolute; left: 7px; top: 6px;
-	width: 55px; height: 55px;
-	background-repeat: no-repeat;
-	background-position: 0 60px;
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  width: 55px;
+  height: 55px;
+  background-repeat: no-repeat;
+  background-position: 0 60px;
 }
 .yellow {
-	background-image: url(ball-yellow.png);
+  background-image: url(ball-yellow.png);
 }
 .green {
-	background-image: url(ball-green.png);
+  background-image: url(ball-green.png);
 }
 .blue {
-	background-image: url(ball-blue.png);
+  background-image: url(ball-blue.png);
 }
 .red {
-	background-image: url(ball-red.png);
+  background-image: url(ball-red.png);
 }
 .violet {
-	background-image: url(ball-violet.png);
+  background-image: url(ball-violet.png);
 }
 .aqua {
-	background-image: url(ball-aqua.png);
+  background-image: url(ball-aqua.png);
 }
 .pink {
-	background-image: url(ball-pink.png);
+  background-image: url(ball-pink.png);
 }
 
 .game {
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-flex-direction: row-reverse;
-	    -ms-flex-direction: row-reverse;
-	        flex-direction: row-reverse;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 /* Column */
 #right-column {
-	position: relative;
-	width: 260px;
+  position: relative;
+  width: 260px;
 }
 
 #game-field {
-	position: relative;
-	width: 617px;
-	margin-right: auto;
+  position: relative;
+  width: 617px;
+  margin-right: auto;
 }
 
 #scores {
-	margin: 15px 0 0;
-	font: 48px Myriad, Trebuchet MS, Arial, sans-serif;
-	color: #F0F0F0;
+  margin: 15px 0 0;
+  font: 48px Myriad, Trebuchet MS, Arial, sans-serif;
+  color: #f0f0f0;
 }
 
 ul {
-    padding: 0;
-    margin: .5em 0;
+  padding: 0;
+  margin: 0.5em 0;
 }
 
 .highscores {
-	height: 30px;
-	color: #999;
+  height: 30px;
+  color: #999;
 }
 .description {
-	margin: 0 20px 20px 0;
-	color: #AAA;
+  margin: 0 20px 20px 0;
+  color: #aaa;
 }
 .new-game {
-	position: relative; left: -4px;
+  position: relative;
+  left: -4px;
 }
 .projects {
-	color: #888;
+  color: #888;
 }
 * html .projects {
-	position: static;
-	margin-top: 50px;
+  position: static;
+  margin-top: 50px;
 }
-h1, h2 {
-	font-weight: normal;
-	color: #AAA;
-    margin-bottom: 0;
+h1,
+h2 {
+  font-weight: normal;
+  color: #aaa;
+  margin-bottom: 0;
 }
-h1 { color: #fff; }
-h2 { font-size: 14px; }
-.projects { padding: 24px 0; }
+h1 {
+  color: #fff;
+}
+h2 {
+  font-size: 14px;
+}
+.projects {
+  padding: 24px 0;
+}
 .projects p {
-	font-size: 11px;
-	margin: 10px 10px 0 0;
+  font-size: 11px;
+  margin: 10px 10px 0 0;
 }
 .projects a {
-	color: #AAA;
-	text-decoration: none;
+  color: #aaa;
+  text-decoration: none;
 }
 .projects a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* Preview */
 .preview-box {
-	height: 100px;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  height: 100px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .preview-box h6 {
-	margin: 0 0 8px;
-	font-weight: normal;
+  margin: 0 0 8px;
+  font-weight: normal;
 }
 .preview-box span {
-	cursor: pointer;
+  cursor: pointer;
 }
 .preview-box span:hover {
-	border-bottom: 1px dashed #FFF;
+  border-bottom: 1px dashed #fff;
 }
 
 #preview {
-	position: relative; left: -12px;
-	margin: 0; padding: 0;
-	list-style: none;
+  position: relative;
+  left: -12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 #preview li {
-	float: left;
-	width: 45px; height: 45px;
-	background-repeat: no-repeat;
-	background-position: -5px -245px;
+  float: left;
+  width: 45px;
+  height: 45px;
+  background-repeat: no-repeat;
+  background-position: -5px -245px;
 }
 
 /* Explorer 6 */
 * html .yellow {
-	background-image: url(ie/ball-yellow.gif);
+  background-image: url(ie/ball-yellow.gif);
 }
 * html .green {
-	background-image: url(ie/ball-green.gif);
+  background-image: url(ie/ball-green.gif);
 }
 * html .blue {
-	background-image: url(ie/ball-blue.gif);
+  background-image: url(ie/ball-blue.gif);
 }
 * html .red {
-	background-image: url(ie/ball-red.gif);
+  background-image: url(ie/ball-red.gif);
 }
 * html .violet {
-	background-image: url(ie/ball-violet.gif);
+  background-image: url(ie/ball-violet.gif);
 }
 * html .aqua {
-	background-image: url(ie/ball-aqua.gif);
+  background-image: url(ie/ball-aqua.gif);
 }
 * html .pink {
-	background-image: url(ie/ball-pink.gif);
+  background-image: url(ie/ball-pink.gif);
 }
 
 .reklama {
-    margin: 0 auto;
+  margin: 0 auto;
+}
 
+[data-ads] > *:not(:empty) {
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
