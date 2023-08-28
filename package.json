@@ -10,6 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.10.14"
+    "@astrojs/svelte": "^3.1.1",
+    "astro": "^2.10.14",
+    "lodash": "^4.17.21",
+    "svelte": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.197"
   }
 }

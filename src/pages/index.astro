@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/base.astro";
+import { Game } from "../components/game";
 
 const newGameButton = `<img
   src="app/new-game.png"
@@ -17,6 +18,8 @@ const newGameButton = `<img
     <script src="https://ymatuhin.ru/ads/ads.js" defer></script>
     <div data-ads></div>
   </div>
+
+  <Game client:load />
 
   <div class="page-center game">
     <div id="right-column">

@@ -60,7 +60,7 @@ input.aux {
 }
 
 body {
-  background: url(page-bgr.png) #454545;
+  background: #454545;
   font: 81.25%/1.46 Arial, Helvetica, sans-serif;
   color: #fff;
 }
@@ -225,33 +225,6 @@ h2 {
   height: 45px;
   background-repeat: no-repeat;
   background-position: -5px -245px;
-}
-
-/* Explorer 6 */
-* html .yellow {
-  background-image: url(ie/ball-yellow.gif);
-}
-* html .green {
-  background-image: url(ie/ball-green.gif);
-}
-* html .blue {
-  background-image: url(ie/ball-blue.gif);
-}
-* html .red {
-  background-image: url(ie/ball-red.gif);
-}
-* html .violet {
-  background-image: url(ie/ball-violet.gif);
-}
-* html .aqua {
-  background-image: url(ie/ball-aqua.gif);
-}
-* html .pink {
-  background-image: url(ie/ball-pink.gif);
-}
-
-.reklama {
-  margin: 0 auto;
 }
 
 [data-ads] > *:not(:empty) {
