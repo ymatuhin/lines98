@@ -3,17 +3,20 @@ import sample from "lodash/sample";
 type Color = "aqua" | "blue" | "green" | "pink" | "red" | "violet" | "yellow";
 const COLORS = ["aqua", "blue", "green", "pink", "red", "violet", "yellow"];
 
-export class Ball {
+export type Ball = {
   color: Color;
-  visible: boolean = true;
-  small: boolean = false;
+  visible: boolean;
+  small: boolean;
+};
 
-  constructor(color: Color, small: boolean = true) {
-    this.color = color;
-    this.small = small;
-  }
+export function createBall(color: Color, small: boolean = false) {
+  return {
+    color,
+    small,
+    visible: true,
+  } as Ball;
+}
 
-  static random() {
-    return new Ball(sample(COLORS) as Color);
-  }
+export function createRandomBall() {
+  return createBall(sample(COLORS) as Color);
 }
