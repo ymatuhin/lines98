@@ -1,79 +1,112 @@
-import { get, writable } from "svelte/store";
-import sample from "lodash/sample";
-import shuffle from "lodash/shuffle";
+import { classLogger, createLogger } from "shared/logger";
+import { createStorage } from "shared/storage";
+import { createStore } from "shared/store";
+import { Ball } from "./ball";
+import { Board, type ActiveCoords, type CellGrid, type Coords } from "./board";
+import { NextBalls, type NextBallsTuple } from "./next-balls";
+import { Score } from "./score";
 
-import { reset as resetScore, add as addScore } from "./score";
-import {
-  type Coords,
-  $grid,
-  $emptyCells,
-  hasBall,
-  setCell,
-  resetGrid,
-  $activeBallCoords,
-  moveActiveBall,
-  removeBalls,
-} from "./grid";
-import { $nextBalls, updateNextBalls } from "./next-balls";
-import { findLines } from "./lines-finder";
-import { findPath } from "./path-finder";
-import { getGridCellByCoords } from "./grid.helpers";
-
-export const $isOver = writable(false);
-export const $wrongCell = writable(false);
-
-export const start = () => {
-  $isOver.set(false);
-  resetScore();
-  resetGrid();
-  updateNextBalls();
-  addNextBallsToBoard();
+type StorageData = {
+  grid: CellGrid;
+  activeCoords: ActiveCoords;
+  nextBalls: NextBallsTuple | [];
 };
 
-export const nextTurn = () => {
-  if (get($isOver)) return;
-  addNextBallsToBoard();
-};
+const log = createLogger("👾 game");
 
-export const gameOver = () => {
-  console.info(`🔥 gameOver (game.ts)`);
-  $isOver.set(true);
-};
+@classLogger(log)
+export class Game {
+  isOver = false;
+  isShaking = false;
+  isAnimating = false;
 
-export const cellClick = (coords: Coords) => {
-  $wrongCell.set(false);
-  const grid = get($grid);
-  const activeCoords = get($activeBallCoords);
-  const cell = getGridCellByCoords(grid, coords);
+  board;
+  nextBalls;
+  score;
+  storage = createStorage<StorageData>("state");
 
-  if (cell) {
-    $activeBallCoords.set(coords);
-  } else if (activeCoords) {
-    const path = findPath(grid, activeCoords, coords);
-    if (!path) return $wrongCell.set(true);
+  constructor(board: Board, nextBalls: NextBalls, score: Score) {
+    this.board = board;
+    this.nextBalls = nextBalls;
+    this.score = score;
+  }
 
-    moveActiveBall(coords);
+  init() {
+    if (this.storage.has()) this.restoreState();
+    else this.start();
+  }
 
-    const lines = findLines(get($grid));
-    if (lines.length) {
-      removeBalls(lines);
-      addScore(lines.length * 2);
-    } else {
-      nextTurn();
+  start() {
+    this.isOver = false;
+    this.board.reset();
+    this.score.reset();
+    this.nextBalls.update();
+    this.board.addBalls(this.nextBalls.value);
+    this.nextBalls.update();
+    this.saveState();
+  }
+
+  nextTurn() {
+    if (this.isOver) return;
+    const result = this.board.addBalls(this.nextBalls.value);
+    this.checkLines();
+    if (!result) return this.gameOver();
+
+    this.nextBalls.update();
+    this.saveState();
+  }
+
+  gameOver() {
+    this.isOver = true;
+    this.storage.clear();
+  }
+
+  async cellClick(coords: Coords) {
+    this.isShaking = false;
+
+    const clickedCell = this.board.getCell(coords);
+    if (clickedCell) {
+      this.board.activeCoords = coords;
+    } else if (this.board.hasActiveCoords) {
+      const path = this.board.findPath(coords);
+      if (!path) return (this.isShaking = true);
+      await this.board.moveActiveBall(coords);
+      const hadLines = this.checkLines();
+      if (!hadLines) this.nextTurn();
+      else this.saveState();
     }
   }
-};
 
-function addNextBallsToBoard() {
-  const nextBalls = get($nextBalls);
-  const emptyCells = shuffle(get($emptyCells));
+  checkLines() {
+    const lines = this.board.findLines();
 
-  for (const ball of nextBalls) {
-    const cell = emptyCells.shift();
-    if (!cell) return gameOver();
-    setCell(cell, ball);
+    if (lines.length) {
+      this.board.clearCells(lines);
+      this.score.add(lines.length * 2);
+    }
+
+    return Boolean(lines.length);
   }
 
-  if (emptyCells.length === 0) return gameOver();
-  updateNextBalls();
+  saveState() {
+    const state: StorageData = {
+      grid: this.board.grid,
+      activeCoords: this.board.activeCoords,
+      nextBalls: this.nextBalls.value,
+    };
+    this.storage.set(state);
+  }
+
+  restoreState() {
+    const { grid, activeCoords, nextBalls } = this.storage.get();
+    this.board.grid = grid;
+    this.board.activeCoords = activeCoords;
+    this.nextBalls.value = nextBalls;
+  }
 }
+
+const nextBalls = new NextBalls(Ball.randomColor);
+const board = new Board();
+const score = new Score();
+
+export default createStore(new Game(board, nextBalls, score));

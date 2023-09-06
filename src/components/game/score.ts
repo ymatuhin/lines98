@@ -1,8 +1,16 @@
-import { writable } from "svelte/store";
+import { classLogger, createLogger } from "shared/logger";
 
-export const $score = writable(0);
+const log = createLogger("💯 score");
 
-export const add = (scored: number) => {
-  $score.update((prev) => prev + scored);
-};
-export const reset = () => $score.set(0);
+@classLogger(log)
+export class Score {
+  value = 0;
+
+  reset() {
+    this.value = 0;
+  }
+
+  add(term: number) {
+    this.value += term;
+  }
+}

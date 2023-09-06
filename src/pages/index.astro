@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/base.astro";
-import { Game } from "../components/game";
+import Game from "../components/game.svelte";
 
 const newGameButton = `<img
   src="app/new-game.png"
@@ -98,9 +98,9 @@ const newGameButton = `<img
     </div>
   </div>
 
-  <script src="/app/base.js" is:inline></script>
+  <!-- <script src="/app/base.js" is:inline></script>
   <script src="/app/main.js" is:inline></script>
   <script is:inline>
   linesGrid.init();
-  </script>
+  </script> -->
 </BaseLayout>

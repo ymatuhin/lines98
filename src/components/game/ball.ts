@@ -1,22 +1,36 @@
 import sample from "lodash/sample";
 
-type Color = "aqua" | "blue" | "green" | "pink" | "red" | "violet" | "yellow";
-const COLORS = ["aqua", "blue", "green", "pink", "red", "violet", "yellow"];
+export const BALLS: BallColor[] = [
+  "aqua",
+  "blue",
+  "green",
+  "pink",
+  "red",
+  "violet",
+  "yellow",
+];
 
-export type Ball = {
-  color: Color;
-  visible: boolean;
-  small: boolean;
-};
+export type BallColor =
+  | "aqua"
+  | "blue"
+  | "green"
+  | "pink"
+  | "red"
+  | "violet"
+  | "yellow";
 
-export function createBall(color: Color, small: boolean = false) {
-  return {
-    color,
-    small,
-    visible: true,
-  } as Ball;
-}
+export type BallSize = "regular" | "small";
 
-export function createRandomBall() {
-  return createBall(sample(COLORS) as Color);
+export class Ball {
+  color: BallColor;
+  isMoving = false;
+
+  constructor(color: BallColor, isMoving = false) {
+    this.color = color;
+    this.isMoving = isMoving;
+  }
+
+  static randomColor() {
+    return new Ball(sample(BALLS)!);
+  }
 }

@@ -1,20 +1,16 @@
-import type { Coords, Grid } from "./grid";
-import {
-  createGridWith,
-  getGridCellByCoords,
-  setGridCellByCoords,
-} from "./grid.helpers";
+import type { Coords, Grid, Cell } from "./board";
+import { createGrid, getCellByCoords, setCellByCoords } from "./helpers";
 
 type QueryItem = Coords & { path: Coords[] };
 
-export function findPath(grid: Grid, coords: Coords, endCoords: Coords) {
+export function findPath(grid: Grid<Cell>, coords: Coords, endCoords: Coords) {
   const query: QueryItem[] = [{ ...coords, path: [{ ...coords }] }];
-  const checkedGrid = createGridWith(false);
-  setGridCellByCoords(checkedGrid, coords, true);
+  const checkedGrid = createGrid(grid.length, false);
+  setCellByCoords(checkedGrid, coords, true);
 
   while (query.length) {
     const { x, y, path } = query.shift()!;
-    setGridCellByCoords(checkedGrid, { x, y }, true);
+    setCellByCoords(checkedGrid, { x, y }, true);
 
     if (x === endCoords.x && y === endCoords.y) return path;
 
@@ -26,11 +22,11 @@ export function findPath(grid: Grid, coords: Coords, endCoords: Coords) {
 
   function handleCell(inputCoords: Coords, path: Coords[]) {
     if (
-      getGridCellByCoords(checkedGrid, inputCoords) === false &&
-      getGridCellByCoords(grid, inputCoords) === null
+      getCellByCoords(checkedGrid, inputCoords) === false &&
+      getCellByCoords(grid, inputCoords) === null
     ) {
       query.push({ ...inputCoords, path: [...path, inputCoords] });
-      setGridCellByCoords(checkedGrid, inputCoords, true);
+      setCellByCoords(checkedGrid, inputCoords, true);
     }
   }
 

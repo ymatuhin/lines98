@@ -1,19 +1,19 @@
 import { expect, test } from "vitest";
 import { findHorizontalLines } from "./find-horizontal-lines";
-import type { Grid } from "../grid";
-import { createBall } from "../ball";
+import type { Grid, Cell } from "../board";
+import { Ball } from "../../ball";
 
-const ball = createBall("blue");
+const ball = new Ball("blue");
 
 test("find one line at start", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [ball, ball, ball, ball, ball],
     [null, null, null, null, null],
     [null, null, null, null, null],
     [null, null, null, null, null],
     [null, null, null, null, null],
   ];
-  expect(findHorizontalLines(testBoard, 5)).toEqual([
+  expect(findHorizontalLines(testGrid, 5)).toEqual([
     { x: 0, y: 0 },
     { x: 1, y: 0 },
     { x: 2, y: 0 },
@@ -23,14 +23,14 @@ test("find one line at start", () => {
 });
 
 test("find one line at end", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [null, null, null, null, null],
     [null, null, null, null, null],
     [null, null, null, null, null],
     [null, null, null, null, null],
     [ball, ball, ball, ball, ball],
   ];
-  expect(findHorizontalLines(testBoard, 5)).toEqual([
+  expect(findHorizontalLines(testGrid, 5)).toEqual([
     { x: 0, y: 4 },
     { x: 1, y: 4 },
     { x: 2, y: 4 },
@@ -40,14 +40,14 @@ test("find one line at end", () => {
 });
 
 test("find one line at middle", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [null, null, null, null, null],
     [null, null, null, null, null],
     [null, ball, ball, ball, null],
     [null, null, null, null, null],
     [null, null, null, null, null],
   ];
-  expect(findHorizontalLines(testBoard, 3)).toEqual([
+  expect(findHorizontalLines(testGrid, 3)).toEqual([
     { x: 1, y: 2 },
     { x: 2, y: 2 },
     { x: 3, y: 2 },

@@ -1,19 +1,19 @@
 import { expect, test } from "vitest";
 import { findDiagonalRaisingLines } from "./find-diagonal-raising-lines";
-import type { Grid } from "../grid";
-import { createBall } from "../ball";
+import type { Grid, Cell } from "../board";
+import { Ball } from "../../ball";
 
-const ball = createBall("blue");
+const ball = new Ball("blue");
 
 test("find line from corner to corner", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [null, null, null, null, ball],
     [null, null, null, ball, null],
     [null, null, ball, null, null],
     [null, ball, null, null, null],
     [ball, null, null, null, null],
   ];
-  expect(findDiagonalRaisingLines(testBoard, 5)).toEqual([
+  expect(findDiagonalRaisingLines(testGrid, 5)).toEqual([
     { x: 0, y: 4 },
     { x: 1, y: 3 },
     { x: 2, y: 2 },
@@ -23,7 +23,7 @@ test("find line from corner to corner", () => {
 });
 
 test("find line from shifted middle", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [null, null, null, null, null, null],
     [null, null, null, null, null, ball],
     [null, null, null, null, ball, null],
@@ -32,7 +32,7 @@ test("find line from shifted middle", () => {
     [null, ball, null, null, null, null],
     [null, null, null, null, null, null],
   ];
-  expect(findDiagonalRaisingLines(testBoard, 5)).toEqual([
+  expect(findDiagonalRaisingLines(testGrid, 5)).toEqual([
     { x: 1, y: 5 },
     { x: 2, y: 4 },
     { x: 3, y: 3 },

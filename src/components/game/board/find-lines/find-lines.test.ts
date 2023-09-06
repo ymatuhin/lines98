@@ -1,21 +1,23 @@
 import { expect, test } from "vitest";
 import { findLines } from "./find-lines";
-import type { Grid } from "../grid";
-import { createBall } from "../ball";
+import type { Grid, Cell } from "../board";
+import { Ball } from "../../ball";
 
-const ball = createBall("blue");
+const ball = new Ball("blue");
 
 test("star", () => {
-  const testBoard: Grid = [
-    [ball, null, ball, null, ball],
-    [null, ball, ball, ball, null],
+  const testGrid: Grid<Cell> = [
+    [null, null, ball, null, null],
+    [null, null, ball, null, null],
     [ball, ball, ball, ball, ball],
-    [null, ball, ball, ball, null],
-    [ball, null, ball, null, ball],
+    [null, null, ball, null, null],
+    [null, null, ball, null, null],
   ];
 
-  const result = findLines(testBoard);
-  expect(result.length).toBe(20);
+  const result = findLines(testGrid);
+
+  // 5 horizontal, 5 vertical, 5 middle cross
+  expect(result.length).toBe(15);
 
   // horizontal
   expect(result).toContainEqual({ x: 0, y: 2 });
@@ -30,6 +32,21 @@ test("star", () => {
   expect(result).toContainEqual({ x: 2, y: 2 });
   expect(result).toContainEqual({ x: 2, y: 3 });
   expect(result).toContainEqual({ x: 2, y: 4 });
+});
+
+test("star", () => {
+  const testGrid: Grid<Cell> = [
+    [ball, null, null, null, ball],
+    [null, ball, null, ball, null],
+    [null, null, ball, null, null],
+    [null, ball, null, ball, null],
+    [ball, null, null, null, ball],
+  ];
+
+  const result = findLines(testGrid);
+
+  // 5 diagonal, 5 another diagonal, 5 middle cross
+  expect(result.length).toBe(15);
 
   // diagonal 1
   expect(result).toContainEqual({ x: 0, y: 0 });
@@ -44,14 +61,4 @@ test("star", () => {
   expect(result).toContainEqual({ x: 2, y: 2 });
   expect(result).toContainEqual({ x: 3, y: 1 });
   expect(result).toContainEqual({ x: 4, y: 0 });
-
-  // exclude
-  expect(result).not.toContainEqual({ x: 1, y: 0 });
-  expect(result).not.toContainEqual({ x: 3, y: 0 });
-  expect(result).not.toContainEqual({ x: 0, y: 1 });
-  expect(result).not.toContainEqual({ x: 4, y: 1 });
-  expect(result).not.toContainEqual({ x: 0, y: 3 });
-  expect(result).not.toContainEqual({ x: 4, y: 3 });
-  expect(result).not.toContainEqual({ x: 1, y: 4 });
-  expect(result).not.toContainEqual({ x: 3, y: 4 });
 });

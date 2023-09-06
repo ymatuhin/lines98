@@ -14,6 +14,9 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
+  shared:
+    specifier: github:ymatuhin/shared
+    version: github.com/ymatuhin/shared/30d1c8f40d4a35f5f5f77b1bce314dc664c7dc9a
   svelte:
     specifier: ^4.2.0
     version: 4.2.0
@@ -1760,6 +1763,10 @@ packages:
       pkg-dir: 4.2.0
     dev: false
 
+  /flatry@1.0.14:
+    resolution: {integrity: sha512-6YW4uLahZdZusQNNJQfcYD+I8I89Zu7CjM39T2ZlEc6RDOEUfJY0AYmCvckuRZmPtCg5WRnLBn/+6jN3FoLmTA==}
+    dev: false
+
   /fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -2903,6 +2910,10 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: false
 
+  /raf-throttle@2.0.6:
+    resolution: {integrity: sha512-C7W6hy78A+vMmk5a/B6C5szjBHrUzWJkVyakjKCK59Uy2CcA7KhO1JUvvH32IXYFIcyJ3FMKP3ZzCc2/71I6Vg==}
+    dev: false
+
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
@@ -3179,6 +3190,10 @@ packages:
       bl: 5.1.0
     dev: false
 
+  /storage-available@1.1.0:
+    resolution: {integrity: sha512-uFHjhmUxyxjEhoEl2sB+ogNWpPoFihk59cfSzPs0wXcCVRtpRti7u3G0O3VEyUuJJIg0oj0g7VGldsNSuhOoqQ==}
+    dev: false
+
   /streamsearch@1.1.0:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
     engines: {node: '>=10.0.0'}
@@ -3304,6 +3319,11 @@ packages:
       pascal-case: 3.1.2
       svelte: 4.2.0
       typescript: 5.2.2
+    dev: false
+
+  /svelte@3.59.2:
+    resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
+    engines: {node: '>= 8'}
     dev: false
 
   /svelte@4.2.0:
@@ -3817,4 +3837,16 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+    dev: false
+
+  github.com/ymatuhin/shared/30d1c8f40d4a35f5f5f77b1bce314dc664c7dc9a:
+    resolution: {tarball: https://codeload.github.com/ymatuhin/shared/tar.gz/30d1c8f40d4a35f5f5f77b1bce314dc664c7dc9a}
+    name: shared
+    version: 0.0.1
+    dependencies:
+      flatry: 1.0.14
+      lodash: 4.17.21
+      raf-throttle: 2.0.6
+      storage-available: 1.1.0
+      svelte: 3.59.2
     dev: false

@@ -1,12 +1,26 @@
-import { writable } from "svelte/store";
-import { type Ball, createRandomBall } from "./ball";
+import { classLogger, createLogger } from "shared/logger";
+import type { Ball } from "./ball";
 
-export const $nextBalls = writable<Ball[]>(getRandomBalls());
+const log = createLogger("🟡 next-balls");
 
-export function updateNextBalls() {
-  $nextBalls.set(getRandomBalls());
-}
+export type NextBallsTuple = [Ball, Ball, Ball];
 
-function getRandomBalls() {
-  return [createRandomBall(), createRandomBall(), createRandomBall()];
+@classLogger(log)
+export class NextBalls {
+  value = [] as NextBallsTuple | [];
+
+  randomBallFactory;
+  constructor(randomBallFactory: typeof Ball.randomColor) {
+    this.randomBallFactory = randomBallFactory;
+  }
+
+  update() {
+    const newBalls: NextBallsTuple = [
+      this.randomBallFactory(),
+      this.randomBallFactory(),
+      this.randomBallFactory(),
+    ];
+
+    this.value = newBalls;
+  }
 }

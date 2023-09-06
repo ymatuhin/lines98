@@ -1,12 +1,12 @@
 import { expect, test } from "vitest";
-import { findPath } from "./path-finder";
-import type { Grid } from "./grid";
-import { createBall } from "./ball";
+import { findPath } from "./find-path";
+import type { Grid, Cell } from "./board";
+import { Ball } from "../ball";
 
-const ball = createBall("blue");
+const ball = new Ball("red");
 
 test("straight horizontal line", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [ball, null, null, null, null],
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -14,13 +14,13 @@ test("straight horizontal line", () => {
     [null, null, null, null, null],
   ];
 
-  const result = findPath(testBoard, { x: 0, y: 0 }, { x: 4, y: 0 });
+  const result = findPath(testGrid, { x: 0, y: 0 }, { x: 4, y: 0 });
   expect(Array.isArray(result)).toBeTruthy();
   expect(result?.length).toBe(5);
 });
 
 test("straight diagonal line", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [ball, null, null, null, null],
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -28,13 +28,13 @@ test("straight diagonal line", () => {
     [null, null, null, null, null],
   ];
 
-  const result = findPath(testBoard, { x: 0, y: 0 }, { x: 4, y: 4 });
+  const result = findPath(testGrid, { x: 0, y: 0 }, { x: 4, y: 4 });
   expect(Array.isArray(result)).toBeTruthy();
   expect(result?.length).toBe(9);
 });
 
 test("impossible", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [ball, null, ball, null, null],
     [ball, ball, ball, null, null],
     [null, null, null, null, null],
@@ -42,12 +42,12 @@ test("impossible", () => {
     [null, null, null, null, null],
   ];
 
-  const result = findPath(testBoard, { x: 0, y: 0 }, { x: 4, y: 0 });
+  const result = findPath(testGrid, { x: 0, y: 0 }, { x: 4, y: 0 });
   expect(result).toBeNull();
 });
 
 test("long and branchy", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [ball, null, ball, null, null],
     [ball, null, ball, null, ball],
     [null, null, ball, null, null],
@@ -55,13 +55,13 @@ test("long and branchy", () => {
     [null, null, null, null, null],
   ];
 
-  const result = findPath(testBoard, { x: 0, y: 0 }, { x: 4, y: 0 });
+  const result = findPath(testGrid, { x: 0, y: 0 }, { x: 4, y: 0 });
   expect(Array.isArray(result)).toBeTruthy();
   expect(result?.length).toBe(17);
 });
 
 test("backwards", () => {
-  const testBoard: Grid = [
+  const testGrid: Grid<Cell> = [
     [null, ball, null, null, null, null, null],
     [null, ball, null, null, null, null, null],
     [null, null, null, null, null, ball, null],
@@ -71,7 +71,7 @@ test("backwards", () => {
     [ball, null, null, null, null, null, null],
   ];
 
-  const result = findPath(testBoard, { x: 5, y: 2 }, { x: 0, y: 4 });
+  const result = findPath(testGrid, { x: 5, y: 2 }, { x: 0, y: 4 });
   expect(Array.isArray(result)).toBeTruthy();
   expect(result?.length).toBe(12);
 });

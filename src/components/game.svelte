@@ -1,44 +1,41 @@
-<script>
+<script lang="ts">
+  import { isClient } from "shared/is/env";
   import { fade } from "svelte/transition";
-  import {
-    $score as score,
-    $grid as grid,
-    $nextBalls as nextBalls,
-    $activeBallCoords as activeBallCoords,
-    start,
-    nextTurn,
-    cellClick,
-    findLines,
-  } from "./index";
+  import game from "./game";
 
-  start();
+  if (isClient) game.init();
+
+  const fakeBalls = ["transparent", "transparent", "transparent"];
 </script>
 
-<h1>Score: {$score}</h1>
+<h1>Score: {$game.score.value}</h1>
 
 <ul class="next-balls">
-  {#each $nextBalls as ball}
-    <li in:fade out:fade class="ball {ball?.color}" />
-  {/each}
+  {#if $game.nextBalls.value.length === 0}
+    {#each fakeBalls as color}
+      <li in:fade out:fade class="ball {color}" />
+    {/each}
+  {:else}
+    {#each $game.nextBalls.value as ball}
+      <li in:fade out:fade class="ball {ball.color}" />
+    {/each}
+  {/if}
 </ul>
 
-<button on:click={start}>start</button>
-<button on:click={nextTurn}>nextTurn</button>
-<button on:click={findLines}>findLines</button>
-
-<p>{$activeBallCoords?.x} x {$activeBallCoords?.y}</p>
+<button on:click={() => game.start()}>restart</button>
+<button on:click={() => game.nextTurn()}>nextTurn</button>
 
 <table class="grid">
-  {#each $grid as row, y}
+  {#each $game.board.grid as row, y}
     <tr>
       {#each row as cell, x}
         <td
-          on:click={() => cellClick({ x, y })}
-          class:active={$activeBallCoords?.x === x &&
-            $activeBallCoords?.y === y}
+          on:click={() => game.cellClick({ x, y })}
+          class:active={$game.board.activeCoords?.x === x &&
+            $game.board.activeCoords?.y === y}
         >
           {#if cell}
-            <div class="ball {cell?.color}" />
+            <div class="ball {cell?.color}" in:fade out:fade />
           {:else}
             <div />
           {/if}
@@ -80,6 +77,11 @@
     position: static;
     box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1),
       inset -8px -8px 16px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .ball.transparent {
+    background: white;
+    opacity: 0.2;
   }
 
   .ball.aqua {
