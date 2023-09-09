@@ -12,14 +12,16 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@astrojs/svelte": "^3.1.1",
-    "astro": "^2.10.14",
+    "@astrojs/preact": "^3.0.0",
+    "@preact/signals": "^1.2.1",
+    "astro": "^3.0.10",
     "lodash": "^4.17.21",
-    "shared": "github:ymatuhin/shared",
-    "svelte": "^4.2.0"
+    "preact": "^10.17.1",
+    "shared": "link:../../shared",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.197",
+    "@types/lodash": "^4.14.198",
     "vitest": "^0.34.3"
   }
 }

@@ -22,10 +22,10 @@ export type BallColor =
 export type BallSize = "regular" | "small";
 
 export class Ball {
-  color: BallColor;
+  color: BallColor | "invisible";
   isMoving = false;
 
-  constructor(color: BallColor, isMoving = false) {
+  constructor(color: BallColor | "invisible", isMoving = false) {
     this.color = color;
     this.isMoving = isMoving;
   }

@@ -1,5 +1,6 @@
 import { classLogger, createLogger } from "shared/logger";
-import type { Ball } from "./ball";
+import { Ball } from "./ball";
+import { signal } from "@preact/signals";
 
 const log = createLogger("🟡 next-balls");
 
@@ -7,7 +8,11 @@ export type NextBallsTuple = [Ball, Ball, Ball];
 
 @classLogger(log)
 export class NextBalls {
-  value = [] as NextBallsTuple | [];
+  balls = signal<NextBallsTuple>([
+    new Ball("invisible"),
+    new Ball("invisible"),
+    new Ball("invisible"),
+  ]);
 
   randomBallFactory;
   constructor(randomBallFactory: typeof Ball.randomColor) {
@@ -21,6 +26,6 @@ export class NextBalls {
       this.randomBallFactory(),
     ];
 
-    this.value = newBalls;
+    this.balls.value = newBalls;
   }
 }

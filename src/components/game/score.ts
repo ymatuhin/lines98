@@ -1,16 +1,17 @@
+import { signal } from "@preact/signals";
 import { classLogger, createLogger } from "shared/logger";
 
 const log = createLogger("💯 score");
 
 @classLogger(log)
 export class Score {
-  value = 0;
+  score = signal(0);
 
   reset() {
-    this.value = 0;
+    this.score.value = 0;
   }
 
-  add(term: number) {
-    this.value += term;
+  add(lines: number) {
+    this.score.value += (lines + (lines - 5)) * 2;
   }
 }

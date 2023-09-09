@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/base.astro";
-import Game from "../components/game.svelte";
+import { GamePreact } from "../components/game-preact";
 
 const newGameButton = `<img
   src="app/new-game.png"
@@ -14,12 +14,7 @@ const newGameButton = `<img
   title="Цветные Линии 98 (Color Lines 98)"
   description="Онлайн игра Линес 98, собери 5 шариков в линию. Бесплатно и без регистрации"
 >
-  <div class="page-center">
-    <script src="https://ymatuhin.ru/ads/ads.js" defer></script>
-    <div data-ads></div>
-  </div>
-
-  <Game client:load />
+  <GamePreact client:load />
 
   <div class="page-center game">
     <div id="right-column">

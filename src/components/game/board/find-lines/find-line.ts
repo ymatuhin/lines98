@@ -1,5 +1,6 @@
 import type { Coords, Grid, Cell } from "../board";
-import { Vector, getFullLine } from "./get-full-line";
+import { getCellByCoords } from "../helpers";
+import { type Vector, getFullLine } from "./get-full-line";
 
 export function findLine(
   grid: Grid<Cell>,
@@ -12,8 +13,8 @@ export function findLine(
   let line: Coords[] = [];
   let prevCoords: Coords | null = null;
   for (const coords of fullLine) {
-    const prevCell = prevCoords ? grid[prevCoords.y][prevCoords.x] : null;
-    const cell = grid[coords.y][coords.x];
+    const prevCell = prevCoords ? getCellByCoords(grid, prevCoords) : null;
+    const cell = getCellByCoords(grid, coords);
 
     if (!cell) {
       if (line.length >= minLineSize) break;

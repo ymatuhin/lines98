@@ -4,6 +4,7 @@ import type { Ball } from "../ball";
 import { findLines } from "./find-lines";
 import { findPath } from "./find-path";
 import { createGrid, getCellByCoords, setCellByCoords } from "./helpers";
+import { signal } from "@preact/signals";
 
 export type Coords = { x: number; y: number };
 export type Cell = Ball | null;
@@ -18,25 +19,25 @@ const log = createLogger("🧮 board");
 
 @classLogger(log)
 export class Board {
-  grid = createGrid(GRID_SIZE, null) as CellGrid;
-  activeCoords = null as Coords | null;
+  grid = signal<CellGrid>(createGrid(GRID_SIZE, null));
+  activeCoords = signal<Coords | null>(null);
 
   get activeCell() {
-    if (!this.activeCoords) return null;
-    return this.getCell(this.activeCoords);
+    if (!this.activeCoords.value) return null;
+    return this.getCell(this.activeCoords.value);
   }
 
   get hasActiveCoords() {
-    return Boolean(this.activeCoords);
+    return Boolean(this.activeCoords.value);
   }
 
   get isGridEmpty() {
-    return this.grid.flat().filter(Boolean).length === 0;
+    return this.grid.value.flat().filter(Boolean).length === 0;
   }
 
   get emptyCells() {
     const emptyList: Coords[] = [];
-    this.grid.forEach((row, y) =>
+    this.grid.value.forEach((row, y) =>
       row.forEach((cell, x) => {
         if (cell === null) emptyList.push({ x, y });
       })
@@ -45,26 +46,29 @@ export class Board {
   }
 
   reset() {
-    this.grid = createGrid(GRID_SIZE, null);
+    this.grid.value = createGrid(GRID_SIZE, null);
   }
 
   // returns false if no more empty cells
   addBalls(balls: Ball[]) {
     const emptyCells = shuffle(this.emptyCells);
     for (const ball of balls) {
-      const cell = emptyCells.shift();
-      if (!cell) return false;
-      this.setCell(cell, ball);
+      const emptyCellCoords = emptyCells.shift();
+      if (!emptyCellCoords) return false;
+      this.setCell(emptyCellCoords, ball);
     }
     return emptyCells.length > 0;
   }
 
   getCell(coords: Coords) {
-    return getCellByCoords(this.grid, coords);
+    return getCellByCoords(this.grid.value, coords);
   }
 
   setCell(coords: Coords, cell: Cell) {
-    this.grid = setCellByCoords(this.grid, coords, cell);
+    // required to trigger signal update
+    const prev = [...this.grid.value];
+    const newVal = setCellByCoords(prev, coords, cell);
+    this.grid.value = newVal;
   }
 
   clearCells(coords: Coords[]) {
@@ -72,20 +76,28 @@ export class Board {
   }
 
   findPath(coords: Coords) {
-    if (!this.activeCoords) throw new Error("No active coords");
-    return findPath(this.grid, this.activeCoords, coords);
+    if (!this.activeCoords.value) throw new Error("No active coords");
+    return findPath(this.grid.value, this.activeCoords.value, coords);
   }
 
-  moveActiveBall(coords: Coords) {
-    if (!this.activeCoords) throw new Error("No active coords");
-    this.setCell(coords, this.activeCell);
-    this.setCell(this.activeCoords, null);
-    this.activeCoords = null;
+  moveActiveBall(path: Coords[]) {
+    if (path.length < 2) return new Promise((res) => setTimeout(res, 200));
+    return new Promise((res) => {
+      const [from, to, ...rest] = path;
+      const finalStep = rest.length === 0;
+      const prevCell = this.getCell(from)!;
 
-    return Promise.resolve();
+      setTimeout(async () => {
+        if (finalStep) this.activeCoords.value = null;
+        this.setCell(from, null);
+        this.setCell(to, { ...prevCell, isMoving: !finalStep });
+
+        res(await this.moveActiveBall([to, ...rest]));
+      }, 25);
+    });
   }
 
   findLines() {
-    return findLines(this.grid, MIN_LINE_SIZE);
+    return findLines(this.grid.value, MIN_LINE_SIZE);
   }
 }

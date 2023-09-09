@@ -1,6 +1,6 @@
+import { batch, signal } from "@preact/signals";
 import { classLogger, createLogger } from "shared/logger";
 import { createStorage } from "shared/storage";
-import { createStore } from "shared/store";
 import { Ball } from "./ball";
 import { Board, type ActiveCoords, type CellGrid, type Coords } from "./board";
 import { NextBalls, type NextBallsTuple } from "./next-balls";
@@ -9,80 +9,87 @@ import { Score } from "./score";
 type StorageData = {
   grid: CellGrid;
   activeCoords: ActiveCoords;
-  nextBalls: NextBallsTuple | [];
+  nextBalls: NextBallsTuple;
 };
 
 const log = createLogger("👾 game");
 
 @classLogger(log)
 export class Game {
-  isOver = false;
-  isShaking = false;
-  isAnimating = false;
+  isOver = signal(false);
+  isShaking = signal(false);
+  isAnimating = signal(false);
+  #storage = createStorage<StorageData>("state");
 
-  board;
-  nextBalls;
-  score;
-  storage = createStorage<StorageData>("state");
-
-  constructor(board: Board, nextBalls: NextBalls, score: Score) {
-    this.board = board;
-    this.nextBalls = nextBalls;
-    this.score = score;
+  Board;
+  NextBalls;
+  Score;
+  constructor(Board: Board, NextBalls: NextBalls, Score: Score) {
+    this.Board = Board;
+    this.NextBalls = NextBalls;
+    this.Score = Score;
   }
 
   init() {
-    if (this.storage.has()) this.restoreState();
+    if (this.#storage.has()) this.restoreState();
     else this.start();
   }
 
   start() {
-    this.isOver = false;
-    this.board.reset();
-    this.score.reset();
-    this.nextBalls.update();
-    this.board.addBalls(this.nextBalls.value);
-    this.nextBalls.update();
+    this.isOver.value = false;
+    this.Board.reset();
+    this.Score.reset();
+    this.NextBalls.update();
+    this.Board.addBalls(this.NextBalls.balls.value);
+    this.NextBalls.update();
     this.saveState();
   }
 
   nextTurn() {
-    if (this.isOver) return;
-    const result = this.board.addBalls(this.nextBalls.value);
+    if (this.isOver.value) return;
+    const result = this.Board.addBalls(this.NextBalls.balls.value);
     this.checkLines();
     if (!result) return this.gameOver();
 
-    this.nextBalls.update();
+    this.NextBalls.update();
     this.saveState();
   }
 
   gameOver() {
-    this.isOver = true;
-    this.storage.clear();
+    this.isOver.value = true;
+    this.#storage.clear();
+  }
+
+  shake() {
+    this.isShaking.value = true;
+    setTimeout(() => (this.isShaking.value = false), 200);
   }
 
   async cellClick(coords: Coords) {
-    this.isShaking = false;
-
-    const clickedCell = this.board.getCell(coords);
+    const clickedCell = this.Board.getCell(coords);
     if (clickedCell) {
-      this.board.activeCoords = coords;
-    } else if (this.board.hasActiveCoords) {
-      const path = this.board.findPath(coords);
-      if (!path) return (this.isShaking = true);
-      await this.board.moveActiveBall(coords);
+      this.Board.activeCoords.value = coords;
+    } else if (this.Board.hasActiveCoords) {
+      const path = this.Board.findPath(coords);
+      if (!path) return this.shake();
+      this.isAnimating.value = true;
+      await this.Board.moveActiveBall(path);
+      this.isAnimating.value = false;
+
       const hadLines = this.checkLines();
       if (!hadLines) this.nextTurn();
       else this.saveState();
+    } else {
+      this.shake();
     }
   }
 
   checkLines() {
-    const lines = this.board.findLines();
+    const lines = this.Board.findLines();
 
     if (lines.length) {
-      this.board.clearCells(lines);
-      this.score.add(lines.length * 2);
+      this.Board.clearCells(lines);
+      this.Score.add(lines.length);
     }
 
     return Boolean(lines.length);
@@ -90,18 +97,20 @@ export class Game {
 
   saveState() {
     const state: StorageData = {
-      grid: this.board.grid,
-      activeCoords: this.board.activeCoords,
-      nextBalls: this.nextBalls.value,
+      grid: this.Board.grid.value,
+      activeCoords: this.Board.activeCoords.value,
+      nextBalls: this.NextBalls.balls.value,
     };
-    this.storage.set(state);
+    this.#storage.set(state);
   }
 
   restoreState() {
-    const { grid, activeCoords, nextBalls } = this.storage.get();
-    this.board.grid = grid;
-    this.board.activeCoords = activeCoords;
-    this.nextBalls.value = nextBalls;
+    const { grid, activeCoords, nextBalls } = this.#storage.get();
+    batch(() => {
+      this.Board.grid.value = grid;
+      this.Board.activeCoords.value = activeCoords;
+      this.NextBalls.balls.value = nextBalls;
+    });
   }
 }
 
@@ -109,4 +118,4 @@ const nextBalls = new NextBalls(Ball.randomColor);
 const board = new Board();
 const score = new Score();
 
-export default createStore(new Game(board, nextBalls, score));
+export default new Game(board, nextBalls, score);
