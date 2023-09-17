@@ -1,0 +1,92 @@
+.root {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+:fullscreen.root {
+  background: var(--c-back);
+}
+
+.main {
+  display: flex;
+  flex: 1 1 75%;
+  max-width: 92vmin;
+  max-height: 92vmin;
+}
+.grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(9, 1fr);
+  margin: -0.33%;
+}
+.aside {
+  flex: 0 1 25%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-glass-light);
+  border-radius: 6%;
+  aspect-ratio: 1/1;
+  margin: 3%;
+  transition: background 0.1s ease-in-out;
+}
+
+.cell-active {
+  background: var(--c-glass-lighter);
+}
+
+.ball {
+  width: 70%;
+  height: 70%;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out,
+    background 0.2s ease-in-out;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ball-moving {
+  transform: scale(0.33);
+  transition: none;
+}
+
+.ball-invisible {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.shake {
+  animation: tilt-shaking 0.2s ease-in-out both;
+}
+@keyframes tilt-shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1deg);
+  }
+  50% {
+    transform: rotate(0eg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.next-balls {
+  display: flex;
+  padding: 0;
+  gap: 0.5rem;
+}

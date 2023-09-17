@@ -3,7 +3,7 @@ import { findPath } from "./find-path";
 import type { Grid, Cell } from "./board";
 import { Ball } from "../ball";
 
-const ball = new Ball("red");
+const ball = new Ball("orange");
 
 test("straight horizontal line", () => {
   const testGrid: Grid<Cell> = [

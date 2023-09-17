@@ -1,0 +1,79 @@
+---
+import { version } from "../../package.json";
+const { pathname } = Astro.url;
+
+const links = [
+  { path: "/about", text: "Об игре" },
+  { path: "/rules", text: "Правила" },
+  { path: "/tips", text: "Советы" },
+  { path: "/contacts", text: "Контакты" },
+  { path: "/changelog", text: version },
+];
+---
+
+<header class="header">
+  <a class="logo" href={pathname === "/" ? null : "/"}>
+    <div class="ball pink"></div>
+    <div class="ball orange"></div>
+    <div class="ball yellow"></div>
+    <div class="ball green"></div>
+    <div class="ball aqua"></div>
+    <div class="ball blue"></div>
+    <div class="ball violet"></div>
+  </a>
+  <nav class="top-nav">
+    {
+      links.map((link) => (
+        <a
+          href={pathname === link.path ? null : link.path}
+          class={pathname === link.path ? "active" : ""}
+        >
+          {link.text}
+        </a>
+      ))
+    }
+  </nav>
+</header>
+
+<style>
+  .header {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--c-glass-light);
+  }
+
+  .logo div {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logo div + div {
+    margin-left: -15px;
+  }
+
+  .top-nav {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .top-nav a {
+    color: var(--c-text);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .top-nav :link:hover,
+  .top-nav :link:focus-visible {
+    color: var(--c-text-lighter);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .top-nav a.active {
+    cursor: default;
+    color: var(--c-text-lighter);
+  }
+</style>

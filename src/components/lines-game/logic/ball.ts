@@ -5,7 +5,7 @@ export const BALLS: BallColor[] = [
   "blue",
   "green",
   "pink",
-  "red",
+  "orange",
   "violet",
   "yellow",
 ];
@@ -15,11 +15,9 @@ export type BallColor =
   | "blue"
   | "green"
   | "pink"
-  | "red"
+  | "orange"
   | "violet"
   | "yellow";
-
-export type BallSize = "regular" | "small";
 
 export class Ball {
   color: BallColor | "invisible";

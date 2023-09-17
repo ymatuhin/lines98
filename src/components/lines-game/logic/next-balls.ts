@@ -28,4 +28,12 @@ export class NextBalls {
 
     this.balls.value = newBalls;
   }
+
+  reset() {
+    this.balls.value = [
+      new Ball("invisible"),
+      new Ball("invisible"),
+      new Ball("invisible"),
+    ];
+  }
 }

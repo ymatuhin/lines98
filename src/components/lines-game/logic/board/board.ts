@@ -4,7 +4,7 @@ import type { Ball } from "../ball";
 import { findLines } from "./find-lines";
 import { findPath } from "./find-path";
 import { createGrid, getCellByCoords, setCellByCoords } from "./helpers";
-import { signal } from "@preact/signals";
+import { signal, batch } from "@preact/signals";
 
 export type Coords = { x: number; y: number };
 export type Cell = Ball | null;
@@ -47,16 +47,19 @@ export class Board {
 
   reset() {
     this.grid.value = createGrid(GRID_SIZE, null);
+    this.activeCoords.value = null;
   }
 
   // returns false if no more empty cells
   addBalls(balls: Ball[]) {
     const emptyCells = shuffle(this.emptyCells);
-    for (const ball of balls) {
-      const emptyCellCoords = emptyCells.shift();
-      if (!emptyCellCoords) return false;
-      this.setCell(emptyCellCoords, ball);
-    }
+    batch(() => {
+      for (const ball of balls) {
+        const emptyCellCoords = emptyCells.shift();
+        if (!emptyCellCoords) return false;
+        this.setCell(emptyCellCoords, ball);
+      }
+    });
     return emptyCells.length > 0;
   }
 
@@ -72,7 +75,9 @@ export class Board {
   }
 
   clearCells(coords: Coords[]) {
-    coords.forEach((coord) => this.setCell(coord, null));
+    batch(() => {
+      coords.forEach((coord) => this.setCell(coord, null));
+    });
   }
 
   findPath(coords: Coords) {

@@ -1,0 +1,21 @@
+:root {
+  --c-back: #1c1917;
+  --c-text-darker: #78716c;
+  --c-text-dark: #a8a29e;
+  --c-text: #beb9b6;
+  --c-text-light: #d6d3d1;
+  --c-text-lighter: #e7e5e4;
+  --c-primary: #3b82f6;
+  --c-accent: #f97316;
+  --c-accent-darker: #ea580c;
+  --c-accent-darkest: #c2410c;
+  --c-glass-light: rgba(255, 255, 255, 0.1);
+  --c-glass-lighter: rgba(255, 255, 255, 0.2);
+  --c-glass-lightest: rgba(255, 255, 255, 0.3);
+  --c-glass-dark: rgba(0, 0, 0, 0.1);
+  --c-glass-darker: rgba(0, 0, 0, 0.2);
+  --c-glass-darkest: rgba(0, 0, 0, 0.3);
+
+  --f-text: "Gill Sans, Gill Sans MT, Calibri, sans-serif";
+  --f-heading: var(--f-text);
+}

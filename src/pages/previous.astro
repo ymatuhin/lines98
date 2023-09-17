@@ -1,21 +1,69 @@
 ---
-import BaseLayout from "../layouts/base.astro";
-import Hero from "../components/hero.astro";
-import { GameLoader } from "../components/lines-game";
+import PreviousLayout from "../layouts/previous.astro";
+
+const newGameButton = `<img
+  src="app/new-game.png"
+  alt="Новая игра"
+  onclick="linesGrid.init()"
+  style="cursor: pointer"
+/>`;
 ---
 
-<BaseLayout
+<PreviousLayout
   title="Цветные Линии 98 (Color Lines 98)"
-  description="Онлайн игра Линес 98, собери 5 шариков в линию. Бесплатно и без регистрации"
+  description="Предыдущая версия онлайн игры Цветные Линии 98, собери 5 шариков в линию. Бесплатно и без регистрации"
 >
-  <Hero />
-  <GameLoader client:load />
-
+  <div class="page-center">
+    <div></div>
+  </div>
+  <a href="/">Home</a>
   <div class="page-center game">
     <div id="right-column">
       <h1>Цветные линии 98 (Color Lines 98)</h1>
       <h2>Играть онлайн, бесплатно, без регистрации</h2>
       <div class="highscores">
+        <br />
+      </div>
+      <h5 id="scores">0</h5>
+      <div class="highscores">
+        <br />
+      </div>
+      <div class="preview-box">
+        <h6>
+          <span id="next-turn">Следующий ход</span>
+        </h6>
+        <ul id="preview">
+          <li>
+            <br />
+          </li>
+          <li>
+            <br />
+          </li>
+          <li>
+            <br />
+          </li>
+        </ul>
+      </div>
+      <div class="description">
+        <p>
+          Цель игры — собрать как можно больше линий из пяти и более шариков
+          одного цвета.
+        </p>
+        <p>
+          Все ходы сохраняются, и вы сможете продолжить игру, даже если закроете
+          окно.
+        </p>
+      </div>
+      <div class="new-game" set:html={newGameButton} />
+      <br />
+      <br />
+    </div>
+
+    <div id="game-field">
+      <div id="grid">
+        <br />
+      </div>
+      <div id="balls">
         <br />
       </div>
     </div>
@@ -46,4 +94,10 @@ import { GameLoader } from "../components/lines-game";
       color online без регистрации
     </div>
   </div>
-</BaseLayout>
+
+  <script src="/app/base.js" is:inline></script>
+  <script src="/app/main.js" is:inline></script>
+  <script is:inline>
+  linesGrid.init();
+  </script>
+</PreviousLayout>

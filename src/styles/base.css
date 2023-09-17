@@ -1,0 +1,34 @@
+html {
+  background: var(--c-back);
+  color: var(--c-text);
+  font: 20px/1.5 Gill Sans, Gill Sans MT, Calibri, sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 1000px;
+}
+
+a {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.125rem 0.25rem;
+}
+
+a:link {
+  color: var(--c-accent);
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--c-accent-darkest);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--c-accent-darker);
+}

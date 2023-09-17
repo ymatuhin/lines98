@@ -1,0 +1,27 @@
+<div class="left-top-dot"></div>
+<div class="right-bottom-dot"></div>
+
+<style>
+  .left-top-dot,
+  .right-bottom-dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    transform: translate(-40%, -40%);
+    width: 100vmax;
+    height: 100vmax;
+    background: radial-gradient(var(--c-accent), var(--c-back), var(--c-back));
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .right-bottom-dot {
+    left: initial;
+    top: initial;
+    right: 0;
+    bottom: 0;
+    transform: translate(40%, 40%);
+    background: radial-gradient(var(--c-primary), var(--c-back), var(--c-back));
+  }
+</style>

@@ -1,0 +1,11 @@
+---
+import BaseLayout from "./base.astro";
+
+type Props = any;
+---
+
+<BaseLayout {...Astro.props}>
+  <div class="typo">
+    <slot />
+  </div>
+</BaseLayout>

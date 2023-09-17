@@ -7,7 +7,7 @@ import {
   findVerticalCross,
 } from "./find-small-crosses";
 
-const ball = new Ball("red");
+const ball = new Ball("orange");
 
 test("vertical cross fails", () => {
   const testGrid: CellGrid = [

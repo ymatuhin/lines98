@@ -4,7 +4,7 @@ import { findLine } from "./find-line";
 import { Ball } from "../../ball";
 
 const ball = new Ball("blue");
-const ball2 = new Ball("red");
+const ball2 = new Ball("orange");
 
 test("find horizontal line with 3 items at start", () => {
   const testGrid: Grid<Cell> = [
