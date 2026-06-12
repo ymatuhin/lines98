@@ -397,8 +397,7 @@ Ball.prototype = {
     var y = this.state;
     if (y > 0 && y < 8) {
       if (!this.active) y = 1;
-      var str = '0 ' + (y - 7) * 60 + 'px';
-      this.obj.style.backgroundPosition = str;
+      this.obj.style.scale = (y / 7).toFixed(3);
       this.obj.style.visibility = 'visible';
     } else {
       this.obj.style.visibility = 'hidden';

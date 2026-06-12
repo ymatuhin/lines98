@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Lines 98 — Kostenlos online spielen, ohne Anmeldung</title>
+    <meta name="description" content="Lines 98 (Color Lines, Kugeln) — das klassische Denkspiel online. Reihe 5 Kugeln gleicher Farbe auf und sammle Punkte. Kostenlos, ohne Anmeldung." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d1117" />
+
+    <link rel="canonical" href="https://lines98.ru/de/" />
+    <link rel="alternate" hreflang="ru" href="https://lines98.ru/" />
+    <link rel="alternate" hreflang="en" href="https://lines98.ru/en/" />
+    <link rel="alternate" hreflang="de" href="https://lines98.ru/de/" />
+    <link rel="alternate" hreflang="x-default" href="https://lines98.ru/en/" />
+
+    <meta property="og:title" content="Lines 98 — Kostenlos online spielen" />
+    <meta property="og:description" content="Das klassische Kugelspiel Color Lines online. Reihe 5 Kugeln gleicher Farbe auf. Kostenlos und ohne Anmeldung." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lines98.ru/de/" />
+
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/app/main.css?v=4" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Wie spielt man Lines 98?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Klicke auf eine Kugel, um sie auszuwählen, dann klicke auf ein freies Feld, um sie dorthin zu bewegen. Ziel ist es, 5 oder mehr Kugeln gleicher Farbe in einer Reihe — horizontal, vertikal oder diagonal — aufzustellen." }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie viele Kugeln braucht man für eine Reihe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Mindestens 5 Kugeln gleicher Farbe. Je länger die Reihe, desto mehr Punkte. Die Reihe kann horizontal, vertikal oder diagonal verlaufen." }
+        },
+        {
+          "@type": "Question",
+          "name": "Ist Lines 98 kostenlos und ohne Anmeldung?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ja, Lines 98 ist völlig kostenlos — keine Anmeldung, kein Download, keine Installation. Einfach die Seite öffnen und spielen." }
+        },
+        {
+          "@type": "Question",
+          "name": "Kann ich Lines 98 auf dem Handy spielen?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ja, die Seite ist für Smartphones und Tablets optimiert. Das Spiel funktioniert in jedem modernen Browser ohne App-Installation." }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie entstehen neue Kugeln?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Nach jedem Zug erscheinen 3 neue Kugeln in zufälligen Farben. Wenn du eine Reihe aufgestellt hast, kommen keine neuen Kugeln — du bekommst einen Gratis-Zug." }
+        },
+        {
+          "@type": "Question",
+          "name": "Was zeigt die Vorschau 'Nächster Zug'?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Die Vorschau zeigt die Farben der 3 Kugeln, die nach deinem nächsten Zug erscheinen werden. Nutze sie zur strategischen Planung." }
+        },
+        {
+          "@type": "Question",
+          "name": "Kann man einen Zug rückgängig machen?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Nein — wie im Original von 1992 gibt es keine Rückgängig-Funktion. Nutze die Vorschau und plane deine Züge sorgfältig." }
+        }
+      ]
+    }
+    </script>
+  </head>
+
+  <body>
+    <main class="game-layout">
+      <div class="game-header">
+        <div class="title-row">
+          <img class="site-icon" src="/favicon.svg" alt="" width="42" height="42" />
+          <h1>Lines 98 — Color Lines Online</h1>
+        </div>
+        <p class="subtitle">Kostenlos spielen, ohne Anmeldung oder Download</p>
+      </div>
+
+      <div class="game-controls">
+        <div class="scores-area">
+          <div class="score-block">
+            <div class="score-label">Punkte</div>
+            <span id="scores">0</span>
+          </div>
+          <span id="highscores"></span>
+        </div>
+        <div class="game-panel">
+          <div class="panel-preview">
+            <span class="preview-label" id="next-turn">Nächster Zug</span>
+            <ul id="preview">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="panel-sep"></div>
+          <button class="new-game-btn" onclick="linesGrid.init()">Neues Spiel</button>
+        </div>
+      </div>
+
+      <div class="game-field-wrapper">
+        <div id="game-field">
+          <div id="grid"></div>
+        </div>
+      </div>
+    </main>
+
+    <section class="content-section">
+      <div class="content-block">
+        <h2>Lines 98 — das klassische Kugelspiel</h2>
+        <p>
+          <strong>Lines 98</strong> (auch bekannt als Color Lines, Kugeln oder Linien) ist ein zeitloses Denkspiel aus dem Jahr 1992. Auf einem 9×9-Spielfeld erscheinen Kugeln in sieben Farben. Pro Zug darfst du eine Kugel auf ein beliebiges erreichbares freies Feld verschieben.
+        </p>
+        <p>
+          Sobald 5 oder mehr Kugeln gleicher Farbe eine Reihe bilden — horizontal, vertikal oder diagonal — verschwinden sie und du sammelst Punkte. Je länger die Reihe, desto mehr Punkte. Schaffst du eine Reihe, erscheinen keine neuen Kugeln — du bekommst einen weiteren Zug gratis.
+        </p>
+        <p>
+          Dein Spielstand wird automatisch gespeichert. Schließe die Seite und kehre später zurück — alles ist noch da. Dein Highscore wird im Browser gespeichert.
+        </p>
+      </div>
+
+      <div class="content-block">
+        <h2>Häufig gestellte Fragen</h2>
+
+        <details class="faq-item">
+          <summary>Wie spielt man Lines 98?</summary>
+          <div class="faq-answer"><p>Klicke auf eine Kugel zur Auswahl, dann auf ein freies Feld, um sie zu bewegen. Ziel ist es, 5 oder mehr gleichfarbige Kugeln in eine Reihe zu bringen.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Wie viele Kugeln braucht man?</summary>
+          <div class="faq-answer"><p>Mindestens 5 gleichfarbige Kugeln in einer Reihe. Längere Reihen bringen mehr Punkte. Horizontal, vertikal und diagonal zählen.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Ist das Spiel kostenlos ohne Anmeldung?</summary>
+          <div class="faq-answer"><p>Ja. Lines 98 ist völlig kostenlos — keine Anmeldung, kein Download, keine Werbung. Seite öffnen und losspielen.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Funktioniert es auf dem Handy?</summary>
+          <div class="faq-answer"><p>Ja, die Seite ist für Smartphones und Tablets optimiert und funktioniert in jedem modernen Browser ohne App.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Wie entstehen neue Kugeln?</summary>
+          <div class="faq-answer"><p>Nach jedem Zug erscheinen 3 neue zufällige Kugeln. Bildest du eine Reihe, erscheinen keine neuen — du bekommst einen Gratis-Zug.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Was zeigt "Nächster Zug"?</summary>
+          <div class="faq-answer"><p>Die Vorschau zeigt die Farben der 3 Kugeln, die nach deinem nächsten Zug erscheinen. Nutze sie zur strategischen Planung.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Kann man einen Zug rückgängig machen?</summary>
+          <div class="faq-answer"><p>Nein — wie im Original gibt es keine Rückgängig-Funktion. Plane sorgfältig mit Hilfe der Vorschau.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <nav class="footer-links">
+          <a href="/">RU</a>
+          <a href="/en/">EN</a>
+          <a href="/de/" class="lang-active">DE</a>
+        </nav>
+        <span class="footer-copy">© 2026 Lines 98</span>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        function scaleField() {
+          var wrapper = document.querySelector('.game-field-wrapper');
+          var field = document.getElementById('game-field');
+          if (!wrapper || !field) return;
+          var available = wrapper.clientWidth;
+          var native = field.offsetWidth;
+          var scale = Math.min(1, available / native);
+          if (scale < 1) {
+            field.style.transform = 'scale(' + scale.toFixed(4) + ')';
+            wrapper.style.height = Math.round(native * scale) + 'px';
+          } else {
+            field.style.transform = '';
+            wrapper.style.height = '';
+          }
+        }
+        window.addEventListener('resize', scaleField);
+        document.addEventListener('DOMContentLoaded', scaleField);
+      })();
+    </script>
+
+    <script src="/app/base.js"></script>
+    <script src="/app/main.js"></script>
+    <script>linesGrid.init();</script>
+
+    <noscript>
+      <img src="https://mc.yandex.ru/watch/42239694" style="position:absolute;left:-9999px" alt="" />
+    </noscript>
+  </body>
+</html>

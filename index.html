@@ -1,169 +1,205 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title>Цветные Линии 98 (Color Lines 98)</title>
     <meta charset="utf-8" />
-    <meta
-      name="description"
-      content="Онлайн игра Линес 98, собери 5 шариков в линию. Бесплатно и без регистрации."
-    />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="app/main.css?v=1" />
+    <title>Линии 98 — играть онлайн бесплатно, без регистрации</title>
+    <meta name="description" content="Линии 98 (шарики) — классическая игра онлайн. Собери 5 шариков одного цвета в линию. Бесплатно, без регистрации, без установки." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d1117" />
+
+    <link rel="canonical" href="https://lines98.ru/" />
+    <link rel="alternate" hreflang="ru" href="https://lines98.ru/" />
+    <link rel="alternate" hreflang="en" href="https://lines98.ru/en/" />
+    <link rel="alternate" hreflang="de" href="https://lines98.ru/de/" />
+    <link rel="alternate" hreflang="x-default" href="https://lines98.ru/en/" />
+
+    <meta property="og:title" content="Линии 98 — играть онлайн бесплатно" />
+    <meta property="og:description" content="Классическая игра шарики онлайн. Собирай линии из 5 шариков одного цвета. Без регистрации и установки." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lines98.ru/" />
 
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="app/main.css?v=4" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как играть в Линии 98?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Кликните на шарик чтобы выбрать его, затем кликните на пустую клетку — шарик переместится по свободному пути. Цель — собрать 5 и более шариков одного цвета в линию по горизонтали, вертикали или диагонали." }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько шариков нужно собрать в линию?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Минимум 5 шариков одного цвета в ряд. Чем длиннее линия — тем больше очков. Линия может идти горизонтально, вертикально или по диагонали." }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли играть в Линии 98 бесплатно без регистрации?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да, игра Линии 98 полностью бесплатна и не требует регистрации, загрузки или установки. Просто откройте сайт и начните играть." }
+        },
+        {
+          "@type": "Question",
+          "name": "Есть ли игра Линии 98 на мобильном телефоне?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да, сайт адаптирован для смартфонов и планшетов. Игра работает в любом современном мобильном браузере без установки приложения." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как появляются новые шарики?",
+          "acceptedAnswer": { "@type": "Answer", "text": "После каждого хода на поле случайно добавляются 3 новых шарика. Если вы собрали линию — новые шарики не появляются, и вы делаете ещё один ход." }
+        },
+        {
+          "@type": "Question",
+          "name": "Что такое «Следующий ход» в игре шарики?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Блок «Следующий ход» показывает 3 цвета шариков, которые появятся на поле после вашего следующего хода. Используйте эту подсказку для планирования стратегии." }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли отменить ход в Линиях 98?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Нет, отмена хода не предусмотрена — как в оригинальной игре 1992 года. Смотрите на подсказку следующих шариков и планируйте наперёд." }
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>
-    <div class="page-center">
-      <script src="https://ymatuhin.ru/ads/ads.js" defer></script>
-      <div data-ads></div>
-    </div>
-
-    <div class="page-center game">
-      <div id="right-column">
-        <h1>Цветные линии 98 (Color Lines 98)</h1>
-        <h2>Играть онлайн, бесплатно, без регистрации</h2>
-        <div class="highscores">
-          <br />
+    <main class="game-layout">
+      <div class="game-header">
+        <div class="title-row">
+          <img class="site-icon" src="/favicon.svg" alt="" width="42" height="42" />
+          <h1>Линии 98 — шарики онлайн</h1>
         </div>
-        <h5 id="scores">0</h5>
-        <div class="highscores">
-          <br />
-        </div>
-        <div class="preview-box">
-          <h6>
-            <span id="next-turn">Следующий ход</span>
-          </h6>
-          <ul id="preview">
-            <li>
-              <br />
-            </li>
-            <li>
-              <br />
-            </li>
-            <li>
-              <br />
-            </li>
-          </ul>
-        </div>
-        <div class="description">
-          <p>
-            Цель игры — собрать как можно больше линий из пяти и более шариков
-            одного цвета.
-          </p>
-          <p>
-            Все ходы сохраняются, и вы сможете продолжить игру, даже если
-            закроете окно.
-          </p>
-        </div>
-        <div class="new-game">
-          <img
-            src="app/new-game.png"
-            alt="Новая игра"
-            onclick="linesGrid.init()"
-            style="cursor: pointer"
-          />
-        </div>
-        <br />
-        <br />
-        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-        <script src="//yastatic.net/share2/share.js" async="async"></script>
-        <div
-          class="ya-share2"
-          data-services="vkontakte,facebook,gplus,twitter,evernote,pocket,telegram"
-          data-counter=""
-        ></div>
+        <p class="subtitle">Играть бесплатно, без регистрации и установки</p>
       </div>
 
-      <div id="game-field">
-        <div id="grid">
-          <br />
+      <div class="game-controls">
+        <div class="scores-area">
+          <div class="score-block">
+            <div class="score-label">Счёт</div>
+            <span id="scores">0</span>
+          </div>
+          <span id="highscores"></span>
         </div>
-        <div id="balls">
-          <br />
+        <div class="game-panel">
+          <div class="panel-preview">
+            <span class="preview-label" id="next-turn">Следующий ход</span>
+            <ul id="preview">
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="panel-sep"></div>
+          <button class="new-game-btn" onclick="linesGrid.init()">Новая игра</button>
         </div>
       </div>
-    </div>
 
-    <div class="page-center">
-      <div data-ads></div>
+      <div class="game-field-wrapper">
+        <div id="game-field">
+          <div id="grid"></div>
+        </div>
+      </div>
+    </main>
 
-      <div class="projects">
-        <h3>Линии 98 / Линес 98</h3>
+    <section class="content-section">
+      <div class="content-block">
+        <h2>Линии 98 — классическая игра шарики</h2>
         <p>
-          Цветные линии, или чаще всего « <strong>Шарики</strong>» — это
-          логическая игра 1992 года. На квадратном поле 9 на 9 клеток программа
-          случайно расставляет 3 шарика разных цветов (всего 7 цветов). За один
-          ход можно передвинуть только один шарик. Когда вы собирете 5 и более
-          шариков в ряд или по диагонали они исчезнут. Чем больше шариков
-          исчезнет за раз, тем больше очков вы получите.
+          <strong>Линии 98</strong> (также известная как «Шарики», Color Lines, Lines 98) — культовая логическая игра 1992 года. На поле 9×9 клеток случайно расставляются шарики семи цветов. За один ход можно переместить один шарик на любую свободную клетку, до которой есть путь.
+        </p>
+        <p>
+          Когда 5 или более шариков одного цвета выстраиваются в линию — горизонталь, вертикаль или диагональ — они исчезают, а вы получаете очки. Чем длиннее линия, тем выше награда. Если линия собрана, новые шарики не добавляются — это ваш шанс продолжить серию.
+        </p>
+        <p>
+          Игра сохраняется автоматически. Закройте вкладку и вернитесь позже — всё будет на месте. Рекорды также хранятся в браузере.
         </p>
       </div>
 
-      <div class="projects">
-        <h4>lines98.ru</h4>
-        линес 98 шарики линес lines.98 цветные линии шарики играть онлайн 98
-        игра бесплатно 5 шариков в линию старая версия старые 5 шаров социальные
-        игры строить цветные линии в ряд color lines шарики color lines игра
-        color lines colored lines +for +the brain windows macos 1992 lines98
-        линия lines 98 играть бесплатно онлайн игра игры шарики линии бесплатная
-        на весь экран color online без регистрации
-      </div>
-    </div>
+      <div class="content-block">
+        <h2>Часто задаваемые вопросы</h2>
 
-    <script src="//d2wy8f7a9ursnm.cloudfront.net/v4/bugsnag.min.js"></script>
+        <details class="faq-item">
+          <summary>Как играть в Линии 98?</summary>
+          <div class="faq-answer"><p>Кликните на шарик чтобы выбрать его, затем на пустую клетку — шарик переместится по свободному пути. Цель — 5 и более шариков одного цвета в линию.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Сколько шариков нужно собрать в линию?</summary>
+          <div class="faq-answer"><p>Минимум 5 шариков одного цвета. Чем длиннее линия — тем больше очков. Горизонталь, вертикаль или диагональ — всё считается.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Игра бесплатна и без регистрации?</summary>
+          <div class="faq-answer"><p>Да. Линии 98 полностью бесплатны, без регистрации, без загрузки и без рекламы. Просто откройте сайт и играйте.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Есть ли версия для мобильного?</summary>
+          <div class="faq-answer"><p>Да, сайт адаптирован для смартфонов и планшетов. Работает в любом современном браузере без установки приложения.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Как появляются новые шарики?</summary>
+          <div class="faq-answer"><p>После каждого хода добавляются 3 новых шарика случайных цветов. Если вы собрали линию — новые шарики не появляются, ход ваш снова.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Что такое «Следующий ход»?</summary>
+          <div class="faq-answer"><p>Блок показывает цвета 3 шариков, которые появятся после вашего следующего хода. Используйте для стратегического планирования.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Можно ли отменить ход?</summary>
+          <div class="faq-answer"><p>Нет, отмена хода не предусмотрена — как в оригинале 1992 года. Смотрите на подсказку следующих шариков и планируйте наперёд.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <nav class="footer-links">
+          <a href="/" class="lang-active">RU</a>
+          <a href="/en/">EN</a>
+          <a href="/de/">DE</a>
+        </nav>
+        <span class="footer-copy">© 2026 Линии 98</span>
+      </div>
+    </footer>
+
     <script>
-      window.bugsnagClient = bugsnag("8729db6e83788a8116b19bca4c594a13");
+      (function () {
+        function scaleField() {
+          var wrapper = document.querySelector('.game-field-wrapper');
+          var field = document.getElementById('game-field');
+          if (!wrapper || !field) return;
+          var available = wrapper.clientWidth;
+          var native = field.offsetWidth;
+          var scale = Math.min(1, available / native);
+          if (scale < 1) {
+            field.style.transform = 'scale(' + scale.toFixed(4) + ')';
+            wrapper.style.height = Math.round(native * scale) + 'px';
+          } else {
+            field.style.transform = '';
+            wrapper.style.height = '';
+          }
+        }
+        window.addEventListener('resize', scaleField);
+        document.addEventListener('DOMContentLoaded', scaleField);
+      })();
     </script>
 
     <script src="app/base.js"></script>
     <script src="app/main.js"></script>
-    <script>
-      linesGrid.init();
-    </script>
+    <script>linesGrid.init();</script>
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-      (function (d, w, c) {
-        (w[c] = w[c] || []).push(function () {
-          try {
-            w.yaCounter42239694 = new Ya.Metrika({
-              id: 42239694,
-              clickmap: true,
-              trackLinks: true,
-              accurateTrackBounce: true,
-            });
-          } catch (e) {}
-        });
-        var n = d.getElementsByTagName("script")[0],
-          s = d.createElement("script"),
-          f = function () {
-            n.parentNode.insertBefore(s, n);
-          };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-        if (w.opera == "[object Opera]") {
-          d.addEventListener("DOMContentLoaded", f, false);
-        } else {
-          f();
-        }
-      })(document, window, "yandex_metrika_callbacks");
-    </script>
     <noscript>
-      <div>
-        <img
-          src="https://mc.yandex.ru/watch/42239694"
-          style="position: absolute; left: -9999px"
-          alt=""
-        />
-      </div>
+      <img src="https://mc.yandex.ru/watch/42239694" style="position:absolute;left:-9999px" alt="" />
     </noscript>
-    <!-- /Yandex.Metrika counter -->
   </body>
 </html>
