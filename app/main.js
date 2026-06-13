@@ -22,11 +22,7 @@ var linesGrid = {
     Preview.init();
     Scores.init();
     if (this.ready) {
-      cookies.remove('savedgame');
-    } else {
-      cookies.path = '/lines';
-      cookies.keep('savedgame', 30);
-      cookies.keep('highscores', 1000);
+      localStorage.removeItem('savedgame');
     }
     this.ready = true;
     onClickOrTap(ID('next-turn'), function() {
@@ -106,14 +102,14 @@ var linesGrid = {
     if (balls.length < 81) {
       var saved =
         balls.join('-') + '~' + Preview.items.join('-') + '~' + Scores.value;
-      cookies.set('savedgame', saved);
+      localStorage.setItem('savedgame', saved);
     } else {
-      cookies.remove('savedgame');
+      localStorage.removeItem('savedgame');
       alert('Game over');
     }
   },
   loadGame: function() {
-    var summary = cookies.get('savedgame');
+    var summary = localStorage.getItem('savedgame');
     if (summary) {
       var values = summary.split('~');
       var balls = values[0].split('-');
@@ -441,7 +437,7 @@ var highscores = {
   active: false,
   init: function() {
     this.obj = ID('highscores');
-    var record = cookies.get('highscores');
+    var record = localStorage.getItem('highscores');
     if (record) {
       var values = record.split(' ', 2);
       this.value = parseInt(values[0]);
@@ -465,7 +461,7 @@ var highscores = {
   save: function() {
     var now = new Date();
     var str = Scores.value + ' ' + now.toGMTString();
-    cookies.set('highscores', str);
+    localStorage.setItem('highscores', str);
   },
 };
 

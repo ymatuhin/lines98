@@ -24,10 +24,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="app/main.css?v=4" />
+    <link rel="stylesheet" href="app/main.css?v=8" />
 
     <script type="application/ld+json">
     {
@@ -75,23 +72,22 @@
   </head>
 
   <body>
+    <div class="page-body">
     <main class="game-layout">
       <div class="game-header">
-        <div class="title-row">
-          <img class="site-icon" src="/favicon.svg" alt="" width="42" height="42" />
+        <img class="site-icon" src="/favicon.svg" alt="" width="56" height="56" />
+        <div class="game-header-text">
           <h1>Линии 98 — шарики онлайн</h1>
+          <p class="subtitle">Играть бесплатно, без регистрации и установки</p>
         </div>
-        <p class="subtitle">Играть бесплатно, без регистрации и установки</p>
       </div>
 
       <div class="game-controls">
-        <div class="scores-area">
-          <div class="score-block">
-            <div class="score-label">Счёт</div>
-            <span id="scores">0</span>
-          </div>
-          <span id="highscores"></span>
+        <div class="score-block">
+          <div class="score-label">Счёт</div>
+          <span id="scores">0</span>
         </div>
+        <span id="highscores"></span>
         <div class="game-panel">
           <div class="panel-preview">
             <span class="preview-label" id="next-turn">Следующий ход</span>
@@ -101,9 +97,8 @@
               <li></li>
             </ul>
           </div>
-          <div class="panel-sep"></div>
-          <button class="new-game-btn" onclick="linesGrid.init()">Новая игра</button>
         </div>
+        <button class="new-game-btn" onclick="linesGrid.init()">Новая игра</button>
       </div>
 
       <div class="game-field-wrapper">
@@ -160,6 +155,7 @@
         </details>
       </div>
     </section>
+    </div>
 
     <footer>
       <div class="footer-inner">
@@ -181,7 +177,7 @@
           var available = wrapper.clientWidth;
           var native = field.offsetWidth;
           var scale = Math.min(1, available / native);
-          if (scale < 1) {
+          if (scale !== 1) {
             field.style.transform = 'scale(' + scale.toFixed(4) + ')';
             wrapper.style.height = Math.round(native * scale) + 'px';
           } else {

@@ -24,10 +24,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/app/main.css?v=4" />
+    <link rel="stylesheet" href="/app/main.css?v=8" />
 
     <script type="application/ld+json">
     {
@@ -75,23 +72,22 @@
   </head>
 
   <body>
+    <div class="page-body">
     <main class="game-layout">
       <div class="game-header">
-        <div class="title-row">
-          <img class="site-icon" src="/favicon.svg" alt="" width="42" height="42" />
+        <img class="site-icon" src="/favicon.svg" alt="" width="56" height="56" />
+        <div class="game-header-text">
           <h1>Lines 98 — Color Lines Online</h1>
+          <p class="subtitle">Kostenlos spielen, ohne Anmeldung oder Download</p>
         </div>
-        <p class="subtitle">Kostenlos spielen, ohne Anmeldung oder Download</p>
       </div>
 
       <div class="game-controls">
-        <div class="scores-area">
-          <div class="score-block">
-            <div class="score-label">Punkte</div>
-            <span id="scores">0</span>
-          </div>
-          <span id="highscores"></span>
+        <div class="score-block">
+          <div class="score-label">Punkte</div>
+          <span id="scores">0</span>
         </div>
+        <span id="highscores"></span>
         <div class="game-panel">
           <div class="panel-preview">
             <span class="preview-label" id="next-turn">Nächster Zug</span>
@@ -101,9 +97,8 @@
               <li></li>
             </ul>
           </div>
-          <div class="panel-sep"></div>
-          <button class="new-game-btn" onclick="linesGrid.init()">Neues Spiel</button>
         </div>
+        <button class="new-game-btn" onclick="linesGrid.init()">Neues Spiel</button>
       </div>
 
       <div class="game-field-wrapper">
@@ -160,6 +155,7 @@
         </details>
       </div>
     </section>
+    </div>
 
     <footer>
       <div class="footer-inner">
