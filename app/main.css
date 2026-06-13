@@ -493,6 +493,19 @@ footer {
   color: var(--text-muted);
 }
 
+.footer-copy a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+
+.footer-copy a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
 /* === Mobile === */
 @media (max-width: 700px) {
   .game-layout {
